@@ -168,9 +168,9 @@ A: Those are line-level linters. `vibescore` gives you a project-level grade acr
 
 Tools in the same ecosystem:
 
-- [tokonomics](https://github.com/stef41/tokonomics) — LLM token cost management
+- [tokonomics](https://github.com/stef41/tokonomix) — LLM token cost management
 - [injectionguard](https://github.com/stef41/injectionguard) — Prompt injection detection
-- [vibesafe](https://github.com/stef41/vibesafe) — AI code safety scanner
+- [vibesafe](https://github.com/stef41/vibesafex) — AI code safety scanner
 - [castwright](https://github.com/stef41/castwright) — Synthetic training data generator
 - [infermark](https://github.com/stef41/infermark) — LLM inference benchmarking
 
