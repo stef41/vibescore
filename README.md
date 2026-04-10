@@ -1,10 +1,10 @@
-# 🎵 vibe-check
+# 🎵 vibescore
 
 **Grade your vibe-coded project. One command. Instant letter grade.**
 
-[![PyPI](https://img.shields.io/pypi/v/vibe-check?color=blue)](https://pypi.org/project/vibe-check/)
+[![PyPI](https://img.shields.io/pypi/v/vibescore?color=blue)](https://pypi.org/project/vibescore/)
 [![License](https://img.shields.io/badge/license-Apache--2.0-green)](LICENSE)
-[![Python](https://img.shields.io/pypi/pyversions/vibe-check)](https://pypi.org/project/vibe-check/)
+[![Python](https://img.shields.io/pypi/pyversions/vibescore)](https://pypi.org/project/vibescore/)
 [![Tests](https://img.shields.io/badge/tests-134%20passed-brightgreen)]()
 
 > "Vibe coding" is the new reality — you prompt, AI writes, you ship.  
@@ -131,7 +131,7 @@ Each category is scored 0–100 independently. The overall score is a weighted a
 
 Security is weighted highest because a security bug in vibe-coded projects can be catastrophic.
 
-## Why vibe-check?
+## Why vibescore?
 
 Vibe coding means AI writes most of your code. That's fast, but it introduces risks:
 

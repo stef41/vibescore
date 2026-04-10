@@ -9,7 +9,7 @@ def main(argv: list[str] | None = None) -> int:
     from . import __version__
 
     parser = argparse.ArgumentParser(
-        prog="vibe-check",
+        prog="vibescore",
         description="\U0001f3b5 Grade your vibe-coded project",
     )
     parser.add_argument(
