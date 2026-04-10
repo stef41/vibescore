@@ -1,0 +1,8 @@
+- id: vibescore
+  name: vibescore
+  description: Grade your vibe-coded project
+  entry: vibescore
+  language: python
+  types: [python]
+  pass_filenames: false
+  args: ["--min-score", "70"]

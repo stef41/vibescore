@@ -154,3 +154,91 @@ def format_report(report: VibeReport) -> str:
 def format_json(report: VibeReport) -> str:
     """Return the report as a JSON string."""
     return json.dumps(asdict(report), indent=2, default=str)
+
+
+def _grade_color(grade: str) -> str:
+    """Return a rich color name for a letter grade."""
+    if grade.startswith("A"):
+        return "green"
+    if grade.startswith("B") or grade.startswith("C"):
+        return "yellow"
+    return "red"
+
+
+def _severity_style(severity: str) -> str:
+    """Return a rich style for issue severity."""
+    return {"critical": "bold red", "warning": "yellow", "info": "blue"}.get(severity, "")
+
+
+def format_report_rich(report: VibeReport) -> str:
+    """Generate a colored report using the *rich* library.
+
+    Raises :class:`ImportError` if ``rich`` is not installed so that
+    callers can fall back to :func:`format_report`.
+    """
+    from io import StringIO
+
+    from rich.console import Console
+    from rich.panel import Panel
+    from rich.table import Table
+    from rich.text import Text
+
+    buf = StringIO()
+    console = Console(file=buf, force_terminal=True, width=60)
+
+    # ── Header panel ──
+    header_lines = (
+        f"Project:   {report.project_name}\n"
+        f"Files:     {_fmt_num(report.total_files)} ({_lang_summary(report.languages)})\n"
+        f"Lines:     {_fmt_num(report.total_lines)}\n"
+        f"Scanned in {report.scan_time_s:.2f}s"
+    )
+    console.print(Panel(header_lines, title="\U0001f3b5 Vibe Check  v0.1.0", expand=False))
+
+    # ── Grade table ──
+    table = Table(show_header=True, header_style="bold")
+    table.add_column("Category", min_width=16)
+    table.add_column("Score", justify="right", min_width=6)
+    table.add_column("Grade", justify="center", min_width=5)
+
+    for cat in report.categories:
+        color = _grade_color(cat.grade)
+        table.add_row(cat.name, f"{cat.score:.1f}", Text(cat.grade, style=color))
+
+    table.add_section()
+    overall_color = _grade_color(report.overall_grade)
+    table.add_row(
+        Text("Overall", style="bold"),
+        Text(f"{report.overall_score:.1f}", style="bold"),
+        Text(report.overall_grade, style=f"bold {overall_color}"),
+    )
+    console.print(table)
+
+    # ── Issues ──
+    all_issues = []
+    for cat in report.categories:
+        all_issues.extend(cat.issues)
+
+    for sev, label, limit in [
+        ("critical", "\U0001f534 Critical Issues", None),
+        ("warning", "\U0001f7e1 Warnings", 20),
+        ("info", "\U0001f4a1 Info", 10),
+    ]:
+        issues = [i for i in all_issues if i.severity == sev]
+        if not issues:
+            continue
+        console.print()
+        console.print(f"[{_severity_style(sev)}]{label} ({len(issues)})[/]")
+        show = issues if limit is None else issues[:limit]
+        for iss in show:
+            loc = ""
+            if iss.file:
+                loc = f"  {iss.file}"
+                if iss.line:
+                    loc += f":{iss.line}"
+            console.print(f"  [{_severity_style(sev)}]{iss.code}[/]  {iss.message}{loc}")
+        if limit and len(issues) > limit:
+            console.print(f"  ... and {len(issues) - limit} more")
+
+    console.print()
+    return buf.getvalue()

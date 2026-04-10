@@ -46,7 +46,12 @@ def main(argv: list[str] | None = None) -> int:
     if args.format == "json":
         print(format_json(report))
     else:
-        print(format_report(report))
+        try:
+            from .report import format_report_rich
+            output = format_report_rich(report)
+        except ImportError:
+            output = format_report(report)
+        print(output)
 
     if report.overall_score < args.min_score:
         return 1

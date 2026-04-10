@@ -118,6 +118,17 @@ for category in report.categories:
 vibescore . --min-score 70 --format json > vibe-report.json
 ```
 
+### Pre-commit
+
+```yaml
+repos:
+  - repo: https://github.com/stef41/vibescore
+    rev: v0.1.0
+    hooks:
+      - id: vibescore
+        args: ["--min-score", "70"]
+```
+
 ## How Scoring Works
 
 Each category is scored 0–100 independently. The overall score is a weighted average:

@@ -99,5 +99,63 @@ class TestFormatJson(unittest.TestCase):
             self.assertIn("grade", cat)
 
 
+class TestFormatReportRich(unittest.TestCase):
+    """Tests for the rich-formatted report."""
+
+    def setUp(self):
+        try:
+            import rich  # noqa: F401
+            self.rich_available = True
+        except ImportError:
+            self.rich_available = False
+
+    def test_rich_returns_string(self):
+        if not self.rich_available:
+            self.skipTest("rich not installed")
+        from vibescore.report import format_report_rich
+        text = format_report_rich(_make_report())
+        self.assertIsInstance(text, str)
+
+    def test_rich_contains_project_name(self):
+        if not self.rich_available:
+            self.skipTest("rich not installed")
+        from vibescore.report import format_report_rich
+        report = _make_report()
+        text = format_report_rich(report)
+        self.assertIn(report.project_name, text)
+
+    def test_rich_contains_categories(self):
+        if not self.rich_available:
+            self.skipTest("rich not installed")
+        from vibescore.report import format_report_rich
+        text = format_report_rich(_make_report())
+        self.assertIn("Code Quality", text)
+        self.assertIn("Security", text)
+        self.assertIn("Dependencies", text)
+        self.assertIn("Testing", text)
+
+    def test_rich_contains_overall(self):
+        if not self.rich_available:
+            self.skipTest("rich not installed")
+        from vibescore.report import format_report_rich
+        text = format_report_rich(_make_report())
+        self.assertIn("Overall", text)
+
+    def test_rich_contains_vibe_check_header(self):
+        if not self.rich_available:
+            self.skipTest("rich not installed")
+        from vibescore.report import format_report_rich
+        text = format_report_rich(_make_report())
+        self.assertIn("Vibe Check", text)
+
+    def test_rich_import_error_fallback(self):
+        """format_report_rich raises ImportError when rich is missing."""
+        import unittest.mock
+        import vibescore.report as mod
+        with unittest.mock.patch.dict("sys.modules", {"rich": None, "rich.console": None, "rich.panel": None, "rich.table": None, "rich.text": None}):
+            with self.assertRaises(ImportError):
+                mod.format_report_rich(_make_report())
+
+
 if __name__ == "__main__":
     unittest.main()
