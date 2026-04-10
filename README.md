@@ -3,9 +3,11 @@
 **Grade your vibe-coded project. One command. Instant letter grade.**
 
 [![PyPI](https://img.shields.io/pypi/v/vibescore?color=blue)](https://pypi.org/project/vibescore/)
+[![Downloads](https://img.shields.io/pypi/dm/vibescore)](https://pypi.org/project/vibescore/)
 [![License](https://img.shields.io/badge/license-Apache--2.0-green)](LICENSE)
 [![Python](https://img.shields.io/pypi/pyversions/vibescore)](https://pypi.org/project/vibescore/)
-[![Tests](https://img.shields.io/badge/tests-134%20passed-brightgreen)]()
+[![CI](https://github.com/stef41/vibescore/actions/workflows/ci.yml/badge.svg)](https://github.com/stef41/vibescore/actions)
+[![Tests](https://img.shields.io/badge/tests-175%20passed-brightgreen)]()
 
 > "Vibe coding" is the new reality — you prompt, AI writes, you ship.  
 > But **is your vibe-coded project actually good?**  
