@@ -4,7 +4,7 @@ import os
 import tempfile
 import unittest
 
-from vibe_check.deps import analyze_deps
+from vibescore.deps import analyze_deps
 
 
 class TestVC401UnpinnedDeps(unittest.TestCase):

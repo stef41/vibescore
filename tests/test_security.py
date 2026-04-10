@@ -4,8 +4,8 @@ import os
 import tempfile
 import unittest
 
-from vibe_check.security import analyze_security
-from vibe_check._types import FileInfo
+from vibescore.security import analyze_security
+from vibescore._types import FileInfo
 
 
 def _make_file(d: str, name: str, content: str, language: str = "python") -> FileInfo:

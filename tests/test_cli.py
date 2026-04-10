@@ -5,7 +5,7 @@ import os
 import tempfile
 import unittest
 
-from vibe_check.cli import main
+from vibescore.cli import main
 
 
 class TestCLIVersion(unittest.TestCase):

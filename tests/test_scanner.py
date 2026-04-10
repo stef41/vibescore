@@ -4,7 +4,7 @@ import os
 import tempfile
 import unittest
 
-from vibe_check.scanner import scan
+from vibescore.scanner import scan
 
 
 class TestScan(unittest.TestCase):

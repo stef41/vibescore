@@ -4,8 +4,8 @@ import os
 import tempfile
 import unittest
 
-from vibe_check.quality import analyze_quality
-from vibe_check._types import FileInfo
+from vibescore.quality import analyze_quality
+from vibescore._types import FileInfo
 
 
 def _make_project(code: str, filename: str = "mod.py") -> tuple[str, list[FileInfo]]:

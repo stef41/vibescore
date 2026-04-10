@@ -5,8 +5,8 @@ import os
 import tempfile
 import unittest
 
-from vibe_check.scanner import scan
-from vibe_check.report import format_report, format_json
+from vibescore.scanner import scan
+from vibescore.report import format_report, format_json
 
 
 def _make_report():

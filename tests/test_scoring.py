@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import unittest
 
-from vibe_check.scoring import score_to_grade, compute_overall
-from vibe_check._types import CategoryScore
+from vibescore.scoring import score_to_grade, compute_overall
+from vibescore._types import CategoryScore
 
 
 class TestScoreToGrade(unittest.TestCase):

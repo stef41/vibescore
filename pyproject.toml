@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "vibe-check"
+name = "vibescore"
 version = "0.1.0"
 description = "Grade your vibe-coded project. One command, instant letter grade across security, quality, dependencies, and testing."
 readme = "README.md"
@@ -43,7 +43,7 @@ dependencies = []
 [project.optional-dependencies]
 rich = ["rich>=13.0"]
 cli = ["click>=8.0", "rich>=13.0"]
-all = ["vibe-check[cli]"]
+all = ["vibescore[cli]"]
 
 [project.scripts]
 vibe-check = "vibe_check.cli:_entry"
@@ -55,7 +55,7 @@ Issues = "https://github.com/stef41/vibe-check/issues"
 Changelog = "https://github.com/stef41/vibe-check/blob/main/CHANGELOG.md"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/vibe_check"]
+packages = ["src/vibescore"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

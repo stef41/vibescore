@@ -4,8 +4,8 @@ import os
 import tempfile
 import unittest
 
-from vibe_check.testing import analyze_testing
-from vibe_check._types import FileInfo
+from vibescore.testing import analyze_testing
+from vibescore._types import FileInfo
 
 
 def _make_project(src_files: dict[str, str], test_files: dict[str, str]) -> tuple[str, list[FileInfo]]:

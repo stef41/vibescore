@@ -4,7 +4,7 @@ import os
 import tempfile
 import unittest
 
-from vibe_check.discovery import discover_files, detect_project_type
+from vibescore.discovery import discover_files, detect_project_type
 
 
 class TestDiscoverFiles(unittest.TestCase):

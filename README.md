@@ -12,7 +12,7 @@
 > Find out in 10 seconds.
 
 ```
-$ vibe-check .
+$ vibescore .
 
 🎵 Vibe Check  v0.1.0
 ══════════════════════════════════════════════
@@ -46,7 +46,7 @@ $ vibe-check .
 ## Install
 
 ```bash
-pip install vibe-check
+pip install vibescore
 ```
 
 That's it. Zero dependencies. Works with Python 3.9+.
@@ -55,22 +55,22 @@ That's it. Zero dependencies. Works with Python 3.9+.
 
 ```bash
 # Grade the current directory
-vibe-check .
+vibescore .
 
 # Grade a specific project
-vibe-check /path/to/project
+vibescore /path/to/project
 
 # JSON output (for CI pipelines)
-vibe-check . --format json
+vibescore . --format json
 
 # Fail CI if score is below threshold
-vibe-check . --min-score 70
+vibescore . --min-score 70
 ```
 
 ### As a Python library
 
 ```python
-from vibe_check import scan
+from vibescore import scan
 
 report = scan(".")
 print(f"Grade: {report.overall_grade} ({report.overall_score:.0f}/100)")
@@ -107,15 +107,15 @@ for category in report.categories:
 ```yaml
 - name: Vibe Check
   run: |
-    pip install vibe-check
-    vibe-check . --min-score 70
+    pip install vibescore
+    vibescore . --min-score 70
 ```
 
 ### Pre-commit (manual)
 
 ```bash
 # In your Makefile or CI script
-vibe-check . --min-score 70 --format json > vibe-report.json
+vibescore . --min-score 70 --format json > vibe-report.json
 ```
 
 ## How Scoring Works
@@ -140,7 +140,7 @@ Vibe coding means AI writes most of your code. That's fast, but it introduces ri
 - **AI often omits tests** or writes superficial ones
 - **AI uses loose dependency pins** that break on updates
 
-`vibe-check` catches these patterns in seconds, so you can ship fast *and* ship safe.
+`vibescore` catches these patterns in seconds, so you can ship fast *and* ship safe.
 
 ## FAQ
 
@@ -151,7 +151,7 @@ A: Currently Python-focused for code quality and testing analysis. Security and 
 A: No. Zero network requests. Zero dependencies. Runs entirely offline.
 
 **Q: How is this different from pylint/ruff/flake8?**  
-A: Those are line-level linters. `vibe-check` gives you a project-level grade across security, quality, testing, and dependencies — a holistic view of your vibe-coded project's health. Use both.
+A: Those are line-level linters. `vibescore` gives you a project-level grade across security, quality, testing, and dependencies — a holistic view of your vibe-coded project's health. Use both.
 
 ## See Also
 
