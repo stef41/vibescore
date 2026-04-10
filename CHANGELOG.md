@@ -1,4 +1,12 @@
 # Changelog
+## [0.3.0] - 2025-07-26
+
+### Added
+- GitHub Actions CI template generator (`--init-ci` flag, `generate_workflow()` API)
+- Watch mode (`--watch` / `-w` flag) for continuous re-scanning on file changes
+- File change detection with smart directory filtering
+- 175 tests (up from 159)
+
 ## [0.2.0] - 2025-04-10
 
 ### Added
