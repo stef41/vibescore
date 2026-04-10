@@ -5,11 +5,12 @@ import time
 
 from .discovery import discover_files, detect_project_type
 from .quality import analyze_quality
+from .quality_js import analyze_quality_js
 from .security import analyze_security
 from .deps import analyze_deps
 from .testing import analyze_testing
-from .scoring import compute_overall
-from ._types import VibeReport
+from .scoring import compute_overall, score_to_grade
+from ._types import CategoryScore, VibeReport
 
 
 def scan(path: str) -> VibeReport:
@@ -26,7 +27,29 @@ def scan(path: str) -> VibeReport:
 
     # Run all analysers
     py_files = [f for f in files if f.language == "python"]
-    quality = analyze_quality(py_files, root)
+    js_files = [f for f in files if f.language in ("javascript", "typescript")]
+
+    quality_scores: list[tuple[CategoryScore, int]] = []
+    if py_files:
+        quality_scores.append((analyze_quality(py_files, root), len(py_files)))
+    if js_files:
+        quality_scores.append((analyze_quality_js(js_files, root), len(js_files)))
+
+    if quality_scores:
+        total_files = sum(count for _, count in quality_scores)
+        merged_score = sum(cat.score * count for cat, count in quality_scores) / total_files
+        all_quality_issues: list = []
+        for cat, _ in quality_scores:
+            all_quality_issues.extend(cat.issues)
+        quality = CategoryScore(
+            name="Code Quality",
+            score=round(merged_score, 1),
+            grade=score_to_grade(merged_score),
+            issues=all_quality_issues,
+        )
+    else:
+        quality = CategoryScore(name="Code Quality", score=100.0, grade="A+", issues=[])
+
     security = analyze_security(files, root)
     deps = analyze_deps(root)
     testing = analyze_testing(files, root)
