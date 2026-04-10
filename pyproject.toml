@@ -1,0 +1,75 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "vibe-check"
+version = "0.1.0"
+description = "Grade your vibe-coded project. One command, instant letter grade across security, quality, dependencies, and testing."
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.9"
+authors = [{ name = "Zacharie B" }]
+keywords = [
+    "vibe-coding",
+    "code-quality",
+    "security",
+    "linter",
+    "code-analysis",
+    "ai-generated-code",
+    "static-analysis",
+    "code-review",
+    "code-grade",
+    "developer-tools",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Security",
+    "Typing :: Typed",
+]
+dependencies = []
+
+[project.optional-dependencies]
+rich = ["rich>=13.0"]
+cli = ["click>=8.0", "rich>=13.0"]
+all = ["vibe-check[cli]"]
+
+[project.scripts]
+vibe-check = "vibe_check.cli:_entry"
+
+[project.urls]
+Homepage = "https://github.com/stef41/vibe-check"
+Repository = "https://github.com/stef41/vibe-check"
+Issues = "https://github.com/stef41/vibe-check/issues"
+Changelog = "https://github.com/stef41/vibe-check/blob/main/CHANGELOG.md"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/vibe_check"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+
+[tool.ruff]
+target-version = "py39"
+line-length = 99
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "SIM", "TCH"]
+
+[tool.mypy]
+python_version = "3.9"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
