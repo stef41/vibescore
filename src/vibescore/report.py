@@ -38,7 +38,7 @@ def format_report(report: VibeReport) -> str:
     w = 46  # inner table width
 
     lines.append("")
-    lines.append("\U0001f3b5 Vibe Check  v0.1.0")
+    lines.append("\U0001f3b5 Vibe Check  v0.2.0")
     lines.append("\u2550" * w)
     lines.append("")
     lines.append(f"  Project:   {report.project_name}")
@@ -193,7 +193,7 @@ def format_report_rich(report: VibeReport) -> str:
         f"Lines:     {_fmt_num(report.total_lines)}\n"
         f"Scanned in {report.scan_time_s:.2f}s"
     )
-    console.print(Panel(header_lines, title="\U0001f3b5 Vibe Check  v0.1.0", expand=False))
+    console.print(Panel(header_lines, title="\U0001f3b5 Vibe Check  v0.2.0", expand=False))
 
     # ── Grade table ──
     table = Table(show_header=True, header_style="bold")

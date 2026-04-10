@@ -1,4 +1,13 @@
 # Changelog
+## [0.2.0] - 2025-04-10
+
+### Added
+- JavaScript/TypeScript code quality analysis (VC211–VC218)
+- Rich terminal output with color-coded grades (optional `rich` dependency)
+- Pre-commit hook integration
+- Multi-language quality scoring (weighted by file count)
+- 25 new tests (159 total)
+
 
 ## [0.1.0] - 2025-04-10
 
