@@ -96,11 +96,10 @@ def analyze_security(files: list[FileInfo], root: str) -> CategoryScore:
             # VC305: unsafe deserialization
             if _RE_UNSAFE_DESER.search(line):
                 # Allow yaml.load with SafeLoader
-                if "yaml.load" in line and _RE_YAML_SAFE.search(line):
-                    continue
-                issues.append(
-                    Issue("VC305", "warning", "Unsafe deserialization", fi.path, lineno)
-                )
+                if not ("yaml.load" in line and _RE_YAML_SAFE.search(line)):
+                    issues.append(
+                        Issue("VC305", "warning", "Unsafe deserialization", fi.path, lineno)
+                    )
 
             # VC306: eval/exec
             if _RE_EVAL_EXEC.search(line):

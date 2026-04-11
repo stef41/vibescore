@@ -74,11 +74,12 @@ def analyze_quality_go(files: list[FileInfo], root: str) -> CategoryScore:
         if _is_test_file(fi.path):
             continue
 
-        source = _read_source(fi.path)
+        full_path = os.path.join(root, fi.path)
+        source = _read_source(full_path)
         if source is None:
             continue
 
-        rel = os.path.relpath(fi.path, root)
+        rel = fi.path
         lines = source.split("\n")
 
         # VC231: Unchecked errors
