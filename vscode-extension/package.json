@@ -3,8 +3,9 @@
   "displayName": "vibescore — Project Grade",
   "description": "Grade your vibe-coded project with inline warnings and letter grades",
   "version": "0.1.0",
-  "publisher": "stef41",
+  "publisher": "ZachBg",
   "license": "Apache-2.0",
+  "icon": "icon.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/stef41/vibescore"
@@ -56,11 +57,13 @@
   },
   "scripts": {
     "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./"
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
     "@types/vscode": "^1.80.0",
-    "typescript": "^5.3.0"
+    "typescript": "^5.3.0",
+    "@vscode/vsce": "^2.22.0"
   }
 }
