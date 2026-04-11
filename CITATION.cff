@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use vibescore in your research, please cite it as below."
+type: software
+title: "vibescore"
+abstract: "Grade your vibe-coded project with a letter grade — security, code quality, dependencies, and testing analysis for Python, JavaScript, Rust, and Go."
+authors:
+  - family-names: "B"
+    given-names: "Zacharie"
+    alias: "stef41"
+version: "0.4.0"
+date-released: "2026-04-11"
+license: Apache-2.0
+url: "https://github.com/stef41/vibescore"
+repository-code: "https://github.com/stef41/vibescore"
+keywords:
+  - code-quality
+  - vibe-coding
+  - static-analysis
+  - security-scanning
+  - python
