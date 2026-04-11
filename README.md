@@ -7,7 +7,7 @@
 [![License](https://img.shields.io/badge/license-Apache--2.0-green)](LICENSE)
 [![Python](https://img.shields.io/pypi/pyversions/vibescore)](https://pypi.org/project/vibescore/)
 [![CI](https://github.com/stef41/vibescore/actions/workflows/ci.yml/badge.svg)](https://github.com/stef41/vibescore/actions)
-[![Tests](https://img.shields.io/badge/tests-175%20passed-brightgreen)]()
+[![Tests](https://img.shields.io/badge/tests-201%20passed-brightgreen)]()
 
 > "Vibe coding" is the new reality — you prompt, AI writes, you ship.  
 > But **is your vibe-coded project actually good?**  
