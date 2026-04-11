@@ -1,8 +1,5 @@
 import * as vscode from "vscode";
-import { execFile } from "child_process";
-import { promisify } from "util";
-
-const execFileAsync = promisify(execFile);
+import { spawn } from "child_process";
 
 interface VibeIssue {
   code: string;
@@ -74,13 +71,31 @@ async function scanProject(rootPath: string): Promise<void> {
   statusBarItem.text = "$(loading~spin) Scanning...";
 
   try {
-    const { stdout } = await execFileAsync(pythonPath, [
-      "-m",
-      "vibescore",
-      rootPath,
-      "--format",
-      "json",
-    ]);
+    const stdout = await new Promise<string>((resolve, reject) => {
+      const proc = spawn(pythonPath, [
+        "-m",
+        "vibescore",
+        rootPath,
+        "--format",
+        "json",
+      ]);
+      let out = "";
+      let err = "";
+      proc.stdout.on("data", (chunk: Buffer) => {
+        out += chunk.toString();
+      });
+      proc.stderr.on("data", (chunk: Buffer) => {
+        err += chunk.toString();
+      });
+      proc.on("close", (code) => {
+        if (code === 0 || out.trim().startsWith("{")) {
+          resolve(out);
+        } else {
+          reject(new Error(err || `vibescore exited with code ${code}`));
+        }
+      });
+      proc.on("error", reject);
+    });
 
     const report: VibeReport = JSON.parse(stdout);
 

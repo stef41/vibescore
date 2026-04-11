@@ -4,8 +4,6 @@ exports.activate = activate;
 exports.deactivate = deactivate;
 const vscode = require("vscode");
 const child_process_1 = require("child_process");
-const util_1 = require("util");
-const execFileAsync = (0, util_1.promisify)(child_process_1.execFile);
 let statusBarItem;
 let diagnosticCollection;
 function activate(context) {
@@ -42,13 +40,32 @@ async function scanProject(rootPath) {
     const minSeverity = config.get("minSeverity") || "warning";
     statusBarItem.text = "$(loading~spin) Scanning...";
     try {
-        const { stdout } = await execFileAsync(pythonPath, [
-            "-m",
-            "vibescore",
-            rootPath,
-            "--format",
-            "json",
-        ]);
+        const stdout = await new Promise((resolve, reject) => {
+            const proc = (0, child_process_1.spawn)(pythonPath, [
+                "-m",
+                "vibescore",
+                rootPath,
+                "--format",
+                "json",
+            ]);
+            let out = "";
+            let err = "";
+            proc.stdout.on("data", (chunk) => {
+                out += chunk.toString();
+            });
+            proc.stderr.on("data", (chunk) => {
+                err += chunk.toString();
+            });
+            proc.on("close", (code) => {
+                if (code === 0 || out.trim().startsWith("{")) {
+                    resolve(out);
+                }
+                else {
+                    reject(new Error(err || `vibescore exited with code ${code}`));
+                }
+            });
+            proc.on("error", reject);
+        });
         const report = JSON.parse(stdout);
         // Update status bar
         const grade = report.overall_grade;
