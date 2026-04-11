@@ -1,0 +1,66 @@
+{
+  "name": "vibescore",
+  "displayName": "vibescore — Project Grade",
+  "description": "Grade your vibe-coded project with inline warnings and letter grades",
+  "version": "0.1.0",
+  "publisher": "stef41",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stef41/vibescore"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:python",
+    "onLanguage:javascript",
+    "onLanguage:typescript",
+    "onLanguage:rust",
+    "onLanguage:go"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "vibescore.scanProject",
+        "title": "Grade Project",
+        "category": "vibescore"
+      }
+    ],
+    "configuration": {
+      "title": "vibescore",
+      "properties": {
+        "vibescore.pythonPath": {
+          "type": "string",
+          "default": "python",
+          "description": "Path to Python interpreter with vibescore installed"
+        },
+        "vibescore.autoScan": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically scan project on file save"
+        },
+        "vibescore.minSeverity": {
+          "type": "string",
+          "default": "warning",
+          "enum": ["critical", "warning", "info"],
+          "description": "Minimum severity level to show"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.80.0",
+    "typescript": "^5.3.0"
+  }
+}

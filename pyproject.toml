@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "vibescore"
-version = "0.3.0"
+version = "0.4.0"
 description = "Grade your vibe-coded project. One command, instant letter grade across security, quality, dependencies, and testing."
 readme = "README.md"
 license = {text = "Apache-2.0"}
@@ -42,8 +42,9 @@ dependencies = []
 
 [project.optional-dependencies]
 rich = ["rich>=13.0"]
+web = ["streamlit>=1.30.0"]
 cli = ["click>=8.0", "rich>=13.0"]
-all = ["vibescore[cli]"]
+all = ["vibescore[cli]", "vibescore[web]"]
 
 [project.scripts]
 vibescore = "vibescore.cli:_entry"

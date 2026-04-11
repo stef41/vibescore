@@ -43,10 +43,43 @@ def main(argv: list[str] | None = None) -> int:
         help="Watch for file changes and re-scan automatically",
     )
     parser.add_argument(
+        "--save-history",
+        action="store_true",
+        help="Save current scan result to history file for grade tracking",
+    )
+    parser.add_argument(
+        "--dashboard",
+        action="store_true",
+        help="Launch web dashboard (requires: pip install vibescore[web])",
+    )
+    parser.add_argument(
+        "--history",
+        action="store_true",
+        help="Show scan history for this project",
+    )
+    parser.add_argument(
         "--version", action="version", version=f"%(prog)s {__version__}"
     )
 
     args = parser.parse_args(argv)
+
+    # --dashboard: launch web dashboard
+    if args.dashboard:
+        from .dashboard import check_streamlit, launch_dashboard
+
+        if not check_streamlit():
+            print("Error: streamlit is required. Install with: pip install vibescore[web]", file=sys.stderr)
+            return 1
+        launch_dashboard(os.path.abspath(args.path))
+        return 0
+
+    # --history: show scan history
+    if args.history:
+        from .dashboard import load_history, format_history_report
+
+        history = load_history(os.path.abspath(args.path))
+        print(format_history_report(history))
+        return 0
 
     # --init-ci: generate workflow and exit
     if args.init_ci:
@@ -85,6 +118,14 @@ def main(argv: list[str] | None = None) -> int:
 
     if report.overall_score < args.min_score:
         return 1
+
+    # --save-history: persist result
+    if args.save_history:
+        from .dashboard import create_history_entry, save_to_history
+
+        entry = create_history_entry(report)
+        save_to_history(os.path.abspath(path), entry)
+        print(f"Saved to .vibescore-history.json")
 
     # --watch: enter watch loop
     if args.watch:

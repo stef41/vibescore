@@ -28,6 +28,8 @@ _EXT_LANGUAGE: dict[str, str] = {
     ".tsx": "typescript",
     ".mjs": "javascript",
     ".cjs": "javascript",
+    ".rs": "rust",
+    ".go": "go",
 }
 
 
