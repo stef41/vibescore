@@ -14,6 +14,8 @@
 > But **is your vibe-coded project actually good?**  
 > Find out in 10 seconds.
 
+[![demo](https://asciinema.org/a/elauUxyYeNuKbc4u.svg)](https://asciinema.org/a/elauUxyYeNuKbc4u)
+
 ```
 $ vibescore .
 
